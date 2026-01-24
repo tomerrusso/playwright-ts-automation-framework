@@ -8,15 +8,20 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
+    
+    - name: List files (Debug)
+      run: ls -R  # הפקודה הזו תראה לנו ביומן בדיוק איפה כל קובץ נמצא
+
     - uses: actions/setup-node@v4
       with:
         node-version: 18
 
     - name: Install dependencies
+      # אם הקובץ בתוך תיקייה, נצטרך להוסיף כאן working-directory
       run: npm install
+      # working-directory: ./שם_התיקייה_שלך (אם יש כזו)
 
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
