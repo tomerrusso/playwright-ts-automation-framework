@@ -4,17 +4,26 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    # כאן אנחנו מגדירים לגיטהאב איפה התיקייה של הפרויקט שלך נמצאת באמת
+    defaults:
+      run:
+        working-directory: ./tests/HomePractice/SaucedemoProject
+
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
         node-version: 18
+
     - name: Install dependencies
       run: npm install
+
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+
     - name: Run Playwright tests
       run: npx playwright test
