@@ -7,24 +7,28 @@ on:
 
 jobs:
   test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     
-    - name: List files (Debug)
-      run: ls -R  # הפקודה הזו תראה לנו ביומן בדיוק איפה כל קובץ נמצא
-
     - uses: actions/setup-node@v4
       with:
         node-version: 18
 
     - name: Install dependencies
-      # אם הקובץ בתוך תיקייה, נצטרך להוסיף כאן working-directory
       run: npm install
-      # working-directory: ./שם_התיקייה_שלך (אם יש כזו)
 
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
-      run: npx playwright test
+      # פקודה שמריצה ספציפית את הקובץ שלך
+      run: npx playwright test TestSaucedemo.spec.ts
+
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
