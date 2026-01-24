@@ -1,0 +1,45 @@
+{
+  "users": {
+    "standard": {
+      "userName": "standard_user",
+      "password": "secret_sauce"
+    },
+    "locked": {
+      "userName": "locked_out_user",
+      "password": "secret_sauce"
+    },
+    "wrong": {
+      "userName": "userking",
+      "password": "123456789"
+    }
+  },
+  "checkout": {
+    "firstName": "Tomas",
+    "lastName": "Russo",
+    "zipCode": "123456789"
+  },
+  "products": {
+    "Backpack": "$29.99",
+    "BikeLight": { "price": "$9.99" },
+    "BoltTShirt": { "price": "$15.99" },
+    "FleeceJacket": { "price": "$49.99" },
+    "Onesie": { "price": "$7.99" },
+    "RedTShirt": { "price": "$15.99" }
+  },
+  "overview": {
+    "itemTotal": "Item total: $129.94",
+    "taxTotal": "Tax: $10.40",
+    "totalPrice": "Total: $140.34"
+  },
+  "complete": {
+    "thankMessage": "Thank you for your order!"
+  },
+  "filters": [
+    "Name (A to Z)",
+    "Name (Z to A)",
+    "Price (low to high)",
+    "Price (high to low)"
+  ],
+  "cartAmount": "1",
+  "errorMessage": "Epic sadface: Username and password do not match any user in this service"
+}
