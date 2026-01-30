@@ -28,7 +28,14 @@ export default defineConfig({
     launchOptions:{
       slowMo:1000,//slow action by 300ms
     },
-    /* Base URL to use in actions like `await page.goto('')`. */
+ 
+  screenshot: 'on',
+  video: 'on-first-retry',
+  
+  
+  
+
+      /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
@@ -51,6 +58,7 @@ export default defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
+   
 
     /* Test against mobile viewports. */
     // {
@@ -79,4 +87,5 @@ export default defineConfig({
   //   url: 'http://localhost:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
+ 
 });
