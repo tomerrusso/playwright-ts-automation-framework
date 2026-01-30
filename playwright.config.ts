@@ -30,7 +30,6 @@ export default defineConfig({
     },
  
   screenshot: 'on',
-  //video: 'on-first-retry',
   video: 'on',
   
   
