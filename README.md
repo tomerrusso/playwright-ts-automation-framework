@@ -1,22 +1,47 @@
-# SauceDemo E2E Automation Project | Playwright & TypeScript
+# 🚀 Saucedemo Automation Framework
+> **An End-to-End Test Suite powered by Playwright & Jenkins CI/CD**
 
-This project is a comprehensive End-to-End (E2E) automation suite for the [SauceDemo](https://www.saucedemo.com/) e-commerce site. It demonstrates professional testing practices, focusing on the full purchase lifecycle from login to checkout.
+[View Project Report](#) | [Watch Demo Video](#) | [Contact Developer](#)
 
-## 🎯 Project Goals
-- Validate the complete user journey: Login, Product Selection, Cart Management, and Checkout.
-- Implement a scalable and maintainable automation architecture.
-- Ensure cross-browser compatibility and robust error handling.
+---
 
-## 🚀 Key Framework Features
-- **Page Object Model (POM):** Separated page-specific logic from test scripts to ensure clean, reusable code.
-- **Data-Driven Testing:** Utilizing various user profiles (Standard, Locked-out, etc.) to validate different system behaviors.
-- **Dynamic Assertions:** Verifying UI elements, price calculations, and success messages throughout the flow.
-- **Reporting:** Integrated HTML reporting for visual debugging and execution summary.
+## 🎯 The Mission
+This project provides a robust, scalable automation solution for the **Saucedemo** e-commerce platform. It demonstrates professional testing standards including the **Page Object Model (POM)** and **CI/CD integration**.
 
 ## 🛠️ Tech Stack
-- **Language:** TypeScript
-- **Framework:** Playwright
-- **Tooling:** Git, Node.js
+| Technology | Role |
+| :--- | :--- |
+| **Playwright** | Browser Automation & Test Runner |
+| **TypeScript** | Strongly Typed Logic |
+| **Jenkins** | CI/CD Pipeline & Scheduling |
+| **Allure/HTML** | Visual Reporting & Analytics |
 
-## ⚙️ Installation & Execution
-1. **Clone the project:**
+## ✨ Key Architectural Highlights
+* **Page Object Model (POM):** Decoupled test logic from UI selectors for 100% maintainability.
+* **Cross-Browser Testing:** Configured for Chromium, Firefox, and Webkit.
+* **Resilient Locators:** Using user-centric locators to reduce flakiness.
+* **Automated Tracing:** Full traces and videos captured for every failed test.
+
+---
+
+## 📊 CI/CD Pipeline (Jenkins)
+Our Jenkins Pipeline (`Jenkinsfile`) automates the entire lifecycle:
+1.  **Environment Setup:** Node.js & Playwright dependencies.
+2.  **Test Execution:** Parallel runs across multiple environments.
+3.  **Artifact Archiving:** Direct publishing of HTML reports to the Jenkins dashboard.
+
+> **Visual Evidence:**
+> ![Jenkins Pipeline](https://via.placeholder.com/800x200?text=Insert+Screenshot+of+your+Jenkins+Stages+Here)
+
+---
+
+## 🚀 Quick Start
+```bash
+# Clone the repository
+git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
+
+# Install dependencies
+npm install
+
+# Run tests
+npx playwright test
