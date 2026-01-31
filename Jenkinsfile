@@ -2,20 +2,26 @@ pipeline {
     agent any
 
     stages {
+        stage('Fix Security Policy') {
+            steps {
+                script {
+                    // פותר את בעיית ה"דף הלבן" בג'נקינס על ידי שחרור חסימת אבטחה של HTML/CSS
+                    System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
+                    echo "Security policy updated to allow HTML reports."
+                }
+            }
+        }
+
         stage('Cleanup') {
             steps {
-                // מנקה את ה-Workspace לפני תחילת הריצה
+                // מנקה את התיקייה לפני שמתחילים
                 cleanWs()
             }
         }
 
-        stage('Setup') {
+        stage('Setup Environment') {
             steps {
-                script {
-                    // שחרור חסימת דוחות (כדי שלא יהיה דף לבן)
-                    System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
-                }
-                // נכנס לתיקייה של הפרויקט ומתקין הכל
+                // ניווט לתיקיית הפרויקט והתקנת תלויות
                 dir('C:/CourseAutomation/playwright-automation/tests/HomePractice/SaucedemoProject') {
                     bat 'npm install'
                     bat 'call npx playwright install chromium'
@@ -23,11 +29,11 @@ pipeline {
             }
         }
 
-        stage('Execute Tests') {
+        stage('Run Tests') {
             steps {
                 dir('C:/CourseAutomation/playwright-automation/tests/HomePractice/SaucedemoProject') {
-                    // מריץ טסטים וממשיך גם אם יש כישלון כדי להפיק דוח
-                    bat 'call npx playwright test || echo "Tests failed, proceeding to report"'
+                    // הרצת הטסטים. ה-|| echo מבטיח שהתהליך ימשיך גם אם טסט נכשל (כדי שיופק דוח)
+                    bat 'call npx playwright test || echo "Tests completed with failures, generating report..."'
                 }
             }
         }
@@ -35,11 +41,15 @@ pipeline {
 
     post {
         always {
-            // העתקת הדוח והצגתו בג'נקינס
             script {
-                def reportDir = "C:/CourseAutomation/playwright-automation/tests/HomePractice/SaucedemoProject/playwright-report"
-                bat "xcopy /E /I /Y \"${reportDir}\" \"${WORKSPACE}/playwright-report\""
+                // הגדרת נתיבים
+                def sourceReport = "C:/CourseAutomation/playwright-automation/tests/HomePractice/SaucedemoProject/playwright-report"
+                def destReport = "${WORKSPACE}/playwright-report"
+
+                // העתקת כל תיקיית הדוח (כולל סרטונים ותמונות) לסביבת העבודה של ג'נקינס
+                bat "xcopy /E /I /Y \"${sourceReport}\" \"${destReport}\""
                 
+                // פרסום הדוח בממשק של ג'נקינס
                 publishHTML(target: [
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
