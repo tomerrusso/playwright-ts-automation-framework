@@ -16,19 +16,24 @@ This project provides a robust, scalable automation solution for the **Saucedemo
 
 ## ✨ Key Architectural Highlights
 * **Page Object Model (POM):** Decoupled test logic from UI selectors for 100% maintainability.
-* **Cross-Browser Testing:** Configured for Chromium, Firefox, and Webkit.
+* **Individual Test Evidence:** Each test case automatically generates its own video recording and trace file.
 * **Resilient Locators:** Using user-centric locators to reduce flakiness.
-* **Automated Evidence:** Full **Trace Viewer** and **Video recordings** captured for every test run.
+* **CI/CD Integrated:** Videos and reports are archived directly in the Jenkins build artifacts.
 
 ---
 
-## 🎥 Project Demo
-### End-to-End Checkout Flow
-See the automation in action! This video shows the complete flow from login to order confirmation:
+## 🎥 Project Demo (Test Recordings)
+### 🛒 Main Flow: Full Checkout
+This video demonstrates the complete end-to-end flow from login to order confirmation:
 
 <video src="./assets/checkout-demo.webm" width="100%" controls></video>
 
-> **Note:** If the video doesn't play directly in your browser, you can find the raw file in the `assets/` folder.
+### 🔍 Other Test Scenarios
+Our suite includes individual recordings for each functional area (available in the `assets/` folder):
+* **Login & Logout:** Validation of secure access.
+* **Product Filtering:** Testing sorting logic (A-Z, Price Low-High, etc.).
+* **Error Handling:** Asserting correct error messages for invalid credentials.
+* **Cart Management:** Adding and verifying specific products like the Backpack.
 
 ---
 
@@ -36,7 +41,7 @@ See the automation in action! This video shows the complete flow from login to o
 Our Jenkins Pipeline (`Jenkinsfile`) automates the entire lifecycle:
 1. **Environment Setup:** Automated installation of Node.js & Playwright browsers.
 2. **Security & CSP:** Configured to allow full HTML report viewing (fixing Jenkins security policy).
-3. **Artifact Archiving:** Direct publishing of HTML reports, Traces, and Videos to the Jenkins dashboard.
+3. **Artifact Archiving:** Direct publishing of HTML reports, Traces, and **6 individual videos** per build.
 
 ---
 
