@@ -28,14 +28,14 @@ See the automation in action! This video shows the complete flow from login to o
 
 <video src="./assets/checkout-demo.webm" width="100%" controls></video>
 
-> **Note:** If the video doesn't play, you can find the raw file in the `assets/` folder.
+> **Note:** If the video doesn't play directly in your browser, you can find the raw file in the `assets/` folder.
 
 ---
 
 ## 📊 CI/CD Pipeline (Jenkins)
 Our Jenkins Pipeline (`Jenkinsfile`) automates the entire lifecycle:
 1. **Environment Setup:** Automated installation of Node.js & Playwright browsers.
-2. **Security & CSP:** Configured to allow full HTML report viewing.
+2. **Security & CSP:** Configured to allow full HTML report viewing (fixing Jenkins security policy).
 3. **Artifact Archiving:** Direct publishing of HTML reports, Traces, and Videos to the Jenkins dashboard.
 
 ---
