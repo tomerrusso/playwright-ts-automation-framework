@@ -1,8 +1,6 @@
 # 🚀 Saucedemo Automation Framework
 > **An End-to-End Test Suite powered by Playwright & Jenkins CI/CD**
 
-[View Project Report](#) | [Watch Demo Video](#) | [Contact Developer](#)
-
 ---
 
 ## 🎯 The Mission
@@ -14,24 +12,31 @@ This project provides a robust, scalable automation solution for the **Saucedemo
 | **Playwright** | Browser Automation & Test Runner |
 | **TypeScript** | Strongly Typed Logic |
 | **Jenkins** | CI/CD Pipeline & Scheduling |
-| **Allure/HTML** | Visual Reporting & Analytics |
+| **HTML Report** | Visual Reporting & Artifacts |
 
 ## ✨ Key Architectural Highlights
 * **Page Object Model (POM):** Decoupled test logic from UI selectors for 100% maintainability.
 * **Cross-Browser Testing:** Configured for Chromium, Firefox, and Webkit.
 * **Resilient Locators:** Using user-centric locators to reduce flakiness.
-* **Automated Tracing:** Full traces and videos captured for every failed test.
+* **Automated Evidence:** Full **Trace Viewer** and **Video recordings** captured for every test run.
+
+---
+
+## 🎥 Project Demo
+### End-to-End Checkout Flow
+See the automation in action! This video shows the complete flow from login to order confirmation:
+
+<video src="./assets/checkout-demo.webm" width="100%" controls></video>
+
+> **Note:** If the video doesn't play, you can find the raw file in the `assets/` folder.
 
 ---
 
 ## 📊 CI/CD Pipeline (Jenkins)
 Our Jenkins Pipeline (`Jenkinsfile`) automates the entire lifecycle:
-1.  **Environment Setup:** Node.js & Playwright dependencies.
-2.  **Test Execution:** Parallel runs across multiple environments.
-3.  **Artifact Archiving:** Direct publishing of HTML reports to the Jenkins dashboard.
-
-> **Visual Evidence:**
-> ![Jenkins Pipeline](https://via.placeholder.com/800x200?text=Insert+Screenshot+of+your+Jenkins+Stages+Here)
+1. **Environment Setup:** Automated installation of Node.js & Playwright browsers.
+2. **Security & CSP:** Configured to allow full HTML report viewing.
+3. **Artifact Archiving:** Direct publishing of HTML reports, Traces, and Videos to the Jenkins dashboard.
 
 ---
 
