@@ -1,4 +1,4 @@
-import { test, Page, BrowserContext, expect } from '@playwright/test';
+import { test, Page, expect } from '@playwright/test';
 import { LoginPage } from './LoginPage';
 import { ProductPage } from './ProductsPage';
 import { YourCartPage } from './YourCart';
@@ -8,9 +8,7 @@ import { CompletePage } from './CompletePage';
 import * as data from './data.json';
 
 test.describe('Page Objects Test', () => {
-    let page: Page;
-    let context: BrowserContext;
-    //Page Objects
+    
     let loginPage: LoginPage
     let prodcutPage: ProductPage
     let yourCart: YourCartPage
@@ -18,16 +16,16 @@ test.describe('Page Objects Test', () => {
     let yourInformationPage: YourInformationPage
     let completePage: CompletePage
 
-    //Global Data
+    // Global Data
     const standardUser = data.users.standard;
-  const wrongUser = data.users.wrong;
-  const checkoutData = data.checkout;
-  const overviewData = data.overview;
-  const completeData = data.complete;
-  const errorMessage = data.errorMessage;
-  const productsData = data.products;
+    const wrongUser = data.users.wrong;
+    const checkoutData = data.checkout;
+    const overviewData = data.overview;
+    const completeData = data.complete;
+    const errorMessage = data.errorMessage;
+    const productsData = data.products;
 
-    //Data - Test:
+    // Data - Test:
     const userName: string = 'standard_user'
     const password: string = 'secret_sauce'
     const firstName: string = 'Tomas'
@@ -47,39 +45,20 @@ test.describe('Page Objects Test', () => {
     const wrongPassword: string = '123456789'
     const cartAmount: string = '1'
 
-
-
-    test.beforeAll(async ({ browser }) => {
-        context = await browser.newContext();
-        //Start Tracing
-        await context.tracing.start({ screenshots: true, snapshots: true, sources: true })
-        page = await context.newPage();
+   
+    test.beforeEach(async ({ page }) => {
         await page.goto('https://www.saucedemo.com/');
-        //Init Page Objects
-
+        
+   
         loginPage = new LoginPage(page)
         prodcutPage = new ProductPage(page)
         yourCart = new YourCartPage(page)
         overviewPage = new OverviewPage(page)
         yourInformationPage = new YourInformationPage(page)
         completePage = new CompletePage(page)
-
-        //Pre-Conditions:
-
-    });
-    test.beforeEach(async () => {
-        await page.goto('https://www.saucedemo.com/');
-    });
-    //  test.afterEach(async () => {
-    //   await page.close();
-    // });
-
-    test.afterAll(async () => {
-        await context.tracing.stop({ path: 'kuku.zip' })
-        await context.close();
-        await page.close();
     });
 
+    
     test("Test full Checkout", async () => {
         await loginPage.signIn(userName, password)
         await prodcutPage.addAllProductsToCart()
@@ -91,9 +70,9 @@ test.describe('Page Objects Test', () => {
         let messege: string = await completePage.getThankMessage()
         expect(messege).toEqual(completeData.thankMessage)
         await completePage.backHome()
-
     })
-    test("Test  total price,tax,item total", async () => {
+
+    test("Test total price,tax,item total", async () => {
         await loginPage.signIn(userName, password)
         await prodcutPage.addAllProductsToCart()
         await prodcutPage.proceedToYourCart()
@@ -109,56 +88,39 @@ test.describe('Page Objects Test', () => {
         let priceAmount: string = await overviewPage.getTotalPrice()
         expect(priceAmount).toEqual(overviewData.totalPrice)
         await overviewPage.finishProcess()
-
-
     })
 
-    test("Test  login & logout", async () => {
+    test("Test login & logout", async () => {
         await loginPage.signIn(standardUser.userName, standardUser.password)
         await expect(prodcutPage.productTitle).toBeVisible()
         let ProductPageTitle :string = await prodcutPage.getPageTitle()
         expect(ProductPageTitle).toEqual("Products")
         await expect(prodcutPage.backpackPrice).toBeVisible()
         let amount: string = await prodcutPage.backPackprice()
-      //  expect(amount).toEqual(productsData.Backpack)
-      await expect(prodcutPage.backpackPrice).toHaveText(productsData.Backpack)
+        await expect(prodcutPage.backpackPrice).toHaveText(productsData.Backpack)
         await prodcutPage.logout()
-
-
     })
-    test("Test  check Filters", async () => {
+
+    test("Test check Filters", async () => {
         await loginPage.signIn(userName, password)
         await prodcutPage.chooseFilter(filter1)
         await prodcutPage.chooseFilter(filter2)
         await prodcutPage.chooseFilter(filter3)
         await prodcutPage.chooseFilter(filter4)
-
-
-
-
     })
 
     test("Test Assert Error message", async () => {
         await loginPage.signIn(wrongUser.userName, wrongUser.password)
         let error: string = await loginPage.getErrorMessage()
         await expect(loginPage.erroMessage).toBeVisible()
-       expect(error).toEqual(erroMessage)
-         // await expect(loginPage.erroMessage).toHaveText(erroMessage)
-
-
-
+        expect(error).toEqual(erroMessage)
     })
+
     test("Test Add Backpackproduct", async () => {
         await loginPage.signIn(userName, password)
         await prodcutPage.addBackPack()
         await expect(prodcutPage.cartProductAmount).toBeVisible()
         let amount: string = await prodcutPage.getCartAmount()
         expect(amount).toEqual(cartAmount)
-
-
-
-
     })
-
-
 })

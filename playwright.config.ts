@@ -13,7 +13,9 @@ export default defineConfig({
       slowMo: 1000, 
     },
     screenshot: 'on',
-    video: 'on',     // מקליט וידאו תמיד
+    video:{ mode: 'on',
+      size: { width: 1280, height: 720 }
+         },     // מקליט וידאו תמיד
     trace: 'on',     // יוצר Trace תמיד (לא רק ב-Retry)
   },
 
